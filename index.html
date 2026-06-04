@@ -3,395 +3,381 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Pyro Fashion | Ignite Your Style</title>
+<title>Pyro Fashion | Ignite Your Scent</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
-
 <script>
 tailwind.config = {
-theme: {
-extend: {
-colors: {
-pyro: "#ff5a1f",
-dark: "#0f0f0f",
-}
-}
-}
+  theme: {
+    extend: {
+      colors: {
+        pyro: "#ff5a1f",
+        gold: "#c9a84c",
+      },
+      fontFamily: {
+        display: ['"Playfair Display"', 'serif'],
+      }
+    }
+  }
 }
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-body {
-font-family: 'Inter', sans-serif;
-background: #0f0f0f;
-}
+* { box-sizing: border-box; }
 
-.glow {
-box-shadow: 0 0 25px rgba(255,90,31,.4);
+body {
+  font-family: 'Inter', sans-serif;
+  background: #080808;
 }
 
 .hero-bg {
-background:
-linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.75)),
-url('https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=1800&q=80');
-background-size: cover;
-background-position: center;
+  background:
+    linear-gradient(135deg, rgba(0,0,0,.75) 0%, rgba(0,0,0,.3) 60%, rgba(0,0,0,.85) 100%),
+    url('https://images.unsplash.com/photo-1541643600914-78b084683702?auto=format&fit=crop&w=1800&q=80');
+  background-size: cover;
+  background-position: center;
 }
 
-.product-card:hover img {
-transform: scale(1.08);
+.text-gradient {
+  background: linear-gradient(120deg, #ff5a1f 0%, #c9a84c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
+
+.gradient-border {
+  background: linear-gradient(#111111, #111111) padding-box,
+              linear-gradient(135deg, rgba(255,90,31,.5), rgba(201,168,76,.5)) border-box;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background: linear-gradient(120deg, #ff5a1f, #d97706);
+  box-shadow: 0 0 28px rgba(255,90,31,.3);
+  transition: opacity .2s, box-shadow .2s;
+}
+.btn-primary:hover {
+  opacity: .9;
+  box-shadow: 0 0 40px rgba(255,90,31,.45);
+}
+
+.product-card {
+  transition: transform .4s cubic-bezier(.22,.61,.36,1), box-shadow .4s ease;
+}
+.product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 60px rgba(0,0,0,.5);
+}
+.product-card:hover .card-img {
+  transform: scale(1.07);
+}
+.card-img {
+  transition: transform .6s cubic-bezier(.22,.61,.36,1);
+}
+
+.editorial-card:hover .editorial-img {
+  transform: scale(1.05);
+}
+.editorial-img {
+  transition: transform .7s cubic-bezier(.22,.61,.36,1);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(36px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up   { animation: fadeUp .9s ease forwards; }
+.delay-1   { animation-delay: .15s; opacity: 0; }
+.delay-2   { animation-delay: .35s; opacity: 0; }
+.delay-3   { animation-delay: .55s; opacity: 0; }
+
+.cart-panel { transition: right .3s cubic-bezier(.22,.61,.36,1); }
 </style>
 </head>
 
 <body class="text-white">
 
 <!-- NAVBAR -->
-<header class="fixed top-0 left-0 w-full z-50 bg-black/60 backdrop-blur-lg border-b border-white/10">
-<div class="max-w-7xl mx-auto px-6">
+<header class="fixed top-0 left-0 w-full z-50 bg-black/30 backdrop-blur-2xl border-b border-white/[0.06]">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex items-center justify-between h-20">
 
-<div class="flex items-center justify-between h-20">
+      <a href="#" class="font-display text-xl font-bold tracking-[.15em] uppercase">
+        Pyro <span class="text-gradient">Fashion</span>
+      </a>
 
-<a href="#" class="text-3xl font-black tracking-wider">
-PYRO <span class="text-pyro">FASHION</span>
-</a>
+      <nav class="hidden md:flex gap-10 text-sm font-medium tracking-wide text-gray-400">
+        <a href="#shop"       class="hover:text-white transition-colors duration-200">Shop</a>
+        <a href="#collection" class="hover:text-white transition-colors duration-200">Collection</a>
+        <a href="#about"      class="hover:text-white transition-colors duration-200">About</a>
+      </nav>
 
-<nav class="hidden md:flex gap-8 text-sm font-medium">
-<a href="#shop" class="hover:text-pyro transition">Shop</a>
-<a href="#featured" class="hover:text-pyro transition">Featured</a>
-<a href="#about" class="hover:text-pyro transition">About</a>
-</nav>
+      <button onclick="toggleCart()"
+        class="flex items-center gap-2.5 border border-white/20 px-5 py-2.5 rounded-full text-sm font-medium hover:border-white/40 hover:bg-white/5 transition-all duration-200">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+        Bag&nbsp;<span id="cart-count">0</span>
+      </button>
 
-<button
-onclick="toggleCart()"
-class="bg-pyro px-5 py-2 rounded-lg font-semibold hover:opacity-90">
-🛒 Cart (<span id="cart-count">0</span>)
-</button>
-
-</div>
-</div>
+    </div>
+  </div>
 </header>
 
 <!-- HERO -->
-<section class="hero-bg min-h-screen flex items-center justify-center text-center">
+<section class="hero-bg min-h-screen flex items-center justify-center text-center relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#080808]"></div>
 
-<div class="max-w-4xl px-6">
+  <div class="relative z-10 max-w-4xl px-6">
 
-<p class="uppercase tracking-[8px] text-pyro mb-4">
-Streetwear Collection 2026
-</p>
+    <p class="fade-up delay-1 text-gold text-[11px] uppercase tracking-[10px] mb-6">
+      Fragrance Collection 2026
+    </p>
 
-<h1 class="text-6xl md:text-8xl font-black leading-none">
-IGNITE
-<br>
-YOUR STYLE
-</h1>
+    <h1 class="fade-up delay-2 font-display font-black leading-none">
+      <span class="block text-7xl md:text-9xl">IGNITE</span>
+      <span class="block text-6xl md:text-8xl italic text-gradient mt-2">Your Scent</span>
+    </h1>
 
-<p class="mt-8 text-gray-300 text-lg md:text-xl max-w-2xl mx-auto">
-Premium streetwear crafted for creators, dreamers,
-and trendsetters.
-</p>
+    <p class="fade-up delay-3 mt-8 text-gray-400 text-base md:text-lg max-w-md mx-auto leading-relaxed">
+      Curated luxury fragrances for those who leave a lasting impression.
+    </p>
 
-<div class="mt-10 flex flex-wrap justify-center gap-4">
-<a href="#shop"
-class="bg-pyro px-8 py-4 rounded-xl font-bold glow">
-Shop Now
-</a>
+    <div class="fade-up delay-3 mt-12 flex flex-wrap justify-center gap-4">
+      <a href="#shop"
+        class="btn-primary px-8 py-4 rounded-full font-semibold text-sm tracking-wide">
+        Shop Fragrances
+      </a>
+      <a href="#collection"
+        class="border border-white/15 px-8 py-4 rounded-full text-sm tracking-wide hover:border-white/35 hover:bg-white/5 transition-all duration-200">
+        Explore Collection
+      </a>
+    </div>
 
-<a href="#featured"
-class="border border-white/20 px-8 py-4 rounded-xl">
-Explore Collection
-</a>
-</div>
-
-</div>
-
+  </div>
 </section>
 
-<!-- FEATURED -->
-<section id="featured" class="py-24 px-6">
+<!-- EDITORIAL COLLECTION -->
+<section id="collection" class="py-32 px-6">
+  <div class="max-w-7xl mx-auto">
 
-<div class="max-w-7xl mx-auto">
+    <div class="text-center mb-20">
+      <p class="text-gold text-[11px] uppercase tracking-[10px] mb-4">Curated Selection</p>
+      <h2 class="font-display text-5xl md:text-6xl font-bold">The Collection</h2>
+    </div>
 
-<h2 class="text-5xl font-black text-center mb-14">
-Featured Collection
-</h2>
+    <div class="grid md:grid-cols-2 gap-5">
 
-<div class="grid md:grid-cols-3 gap-8">
+      <!-- LV Meteore -->
+      <div class="editorial-card relative overflow-hidden rounded-3xl h-[580px] group cursor-pointer">
+        <img
+          src="https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?auto=format&fit=crop&w=1200&q=80"
+          class="editorial-img w-full h-full object-cover"
+          alt="LV Météore">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 p-10">
+          <p class="text-gold text-[10px] tracking-[8px] uppercase mb-2">Louis Vuitton</p>
+          <h3 class="font-display text-4xl font-bold mb-3">Météore</h3>
+          <p class="text-gray-400 text-sm leading-relaxed max-w-xs">
+            A fresh, luminous trail — bergamot, white musk, and a streak of solar warmth.
+          </p>
+          <a href="#shop" class="mt-6 inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors border-b border-white/20 pb-0.5">
+            Shop Now <span>→</span>
+          </a>
+        </div>
+      </div>
 
-<div class="bg-zinc-900 rounded-3xl overflow-hidden">
-<img
-src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80"
-class="w-full h-96 object-cover">
-<div class="p-6">
-<h3 class="font-bold text-2xl">Urban Flame</h3>
-<p class="text-gray-400 mt-2">
-Oversized premium hoodie.
-</p>
-</div>
-</div>
+      <!-- Tom Ford Vanilla Sex -->
+      <div class="editorial-card relative overflow-hidden rounded-3xl h-[580px] group cursor-pointer">
+        <img
+          src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?auto=format&fit=crop&w=1200&q=80"
+          class="editorial-img w-full h-full object-cover"
+          alt="Tom Ford Vanilla Sex">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 p-10">
+          <p class="text-gold text-[10px] tracking-[8px] uppercase mb-2">Tom Ford</p>
+          <h3 class="font-display text-4xl font-bold mb-3">Vanilla Sex</h3>
+          <p class="text-gray-400 text-sm leading-relaxed max-w-xs">
+            Bold, sensual, unapologetic. Dark vanilla, amber, and black pepper ignite the senses.
+          </p>
+          <a href="#shop" class="mt-6 inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors border-b border-white/20 pb-0.5">
+            Shop Now <span>→</span>
+          </a>
+        </div>
+      </div>
 
-<div class="bg-zinc-900 rounded-3xl overflow-hidden">
-<img
-src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=80"
-class="w-full h-96 object-cover">
-<div class="p-6">
-<h3 class="font-bold text-2xl">Inferno Jacket</h3>
-<p class="text-gray-400 mt-2">
-Luxury streetwear outerwear.
-</p>
-</div>
-</div>
-
-<div class="bg-zinc-900 rounded-3xl overflow-hidden">
-<img
-src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80"
-class="w-full h-96 object-cover">
-<div class="p-6">
-<h3 class="font-bold text-2xl">Pyro Essentials</h3>
-<p class="text-gray-400 mt-2">
-Everyday elevated basics.
-</p>
-</div>
-</div>
-
-</div>
-</div>
-
+    </div>
+  </div>
 </section>
 
-<!-- PRODUCTS -->
-<section id="shop" class="py-20 px-6 bg-black">
+<!-- SHOP -->
+<section id="shop" class="py-24 px-6 bg-black">
+  <div class="max-w-7xl mx-auto">
 
-<div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <p class="text-gold text-[11px] uppercase tracking-[10px] mb-4">Luxury Fragrances</p>
+      <h2 class="font-display text-5xl md:text-6xl font-bold">Shop Now</h2>
+    </div>
 
-<h2 class="text-5xl font-black text-center mb-14">
-Shop Now
-</h2>
+    <div class="grid sm:grid-cols-2 gap-8 max-w-2xl mx-auto">
 
-<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- LV Météore -->
+      <div class="product-card gradient-border rounded-3xl overflow-hidden bg-[#0f0f0f]">
+        <div class="overflow-hidden h-72">
+          <img
+            src="https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?auto=format&fit=crop&w=900&q=80"
+            class="card-img h-72 w-full object-cover"
+            alt="LV Météore">
+        </div>
+        <div class="p-7">
+          <p class="text-gold text-[10px] tracking-[6px] uppercase mb-1">Louis Vuitton</p>
+          <h3 class="font-display text-2xl font-bold mt-1">Météore</h3>
+          <p class="text-gray-600 text-xs mt-1.5 mb-5">100 ml · Eau de Parfum</p>
+          <div class="flex items-end justify-between">
+            <span class="text-3xl font-bold">$340</span>
+          </div>
+          <button
+            onclick="addToCart('LV Météore', 340)"
+            class="btn-primary w-full mt-5 py-3.5 rounded-xl font-semibold text-sm tracking-wide">
+            Add to Bag
+          </button>
+        </div>
+      </div>
 
-<!-- PRODUCT -->
-<div class="product-card bg-zinc-900 rounded-3xl overflow-hidden">
+      <!-- Tom Ford Vanilla Sex -->
+      <div class="product-card gradient-border rounded-3xl overflow-hidden bg-[#0f0f0f]">
+        <div class="overflow-hidden h-72">
+          <img
+            src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?auto=format&fit=crop&w=900&q=80"
+            class="card-img h-72 w-full object-cover"
+            alt="Tom Ford Vanilla Sex">
+        </div>
+        <div class="p-7">
+          <p class="text-gold text-[10px] tracking-[6px] uppercase mb-1">Tom Ford</p>
+          <h3 class="font-display text-2xl font-bold mt-1">Vanilla Sex</h3>
+          <p class="text-gray-600 text-xs mt-1.5 mb-5">50 ml · Eau de Parfum</p>
+          <div class="flex items-end justify-between">
+            <span class="text-3xl font-bold">$215</span>
+          </div>
+          <button
+            onclick="addToCart('Tom Ford Vanilla Sex', 215)"
+            class="btn-primary w-full mt-5 py-3.5 rounded-xl font-semibold text-sm tracking-wide">
+            Add to Bag
+          </button>
+        </div>
+      </div>
 
-<div class="overflow-hidden">
-<img
-src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80"
-class="h-80 w-full object-cover transition duration-500">
-</div>
-
-<div class="p-6">
-
-<h3 class="font-bold text-xl">
-Pyro Tee
-</h3>
-
-<p class="text-pyro font-bold text-2xl mt-2">
-$39
-</p>
-
-<button
-onclick="addToCart('Pyro Tee',39)"
-class="w-full mt-5 bg-pyro py-3 rounded-xl font-bold">
-Add To Cart
-</button>
-
-</div>
-
-</div>
-
-<div class="product-card bg-zinc-900 rounded-3xl overflow-hidden">
-<div class="overflow-hidden">
-<img
-src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=900&q=80"
-class="h-80 w-full object-cover transition duration-500">
-</div>
-
-<div class="p-6">
-<h3 class="font-bold text-xl">Pyro Hoodie</h3>
-<p class="text-pyro font-bold text-2xl">$79</p>
-
-<button
-onclick="addToCart('Pyro Hoodie',79)"
-class="w-full mt-5 bg-pyro py-3 rounded-xl font-bold">
-Add To Cart
-</button>
-</div>
-</div>
-
-<div class="product-card bg-zinc-900 rounded-3xl overflow-hidden">
-<div class="overflow-hidden">
-<img
-src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80"
-class="h-80 w-full object-cover transition duration-500">
-</div>
-
-<div class="p-6">
-<h3 class="font-bold text-xl">Flame Jacket</h3>
-<p class="text-pyro font-bold text-2xl">$129</p>
-
-<button
-onclick="addToCart('Flame Jacket',129)"
-class="w-full mt-5 bg-pyro py-3 rounded-xl font-bold">
-Add To Cart
-</button>
-</div>
-</div>
-
-<div class="product-card bg-zinc-900 rounded-3xl overflow-hidden">
-<div class="overflow-hidden">
-<img
-src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80"
-class="h-80 w-full object-cover transition duration-500">
-</div>
-
-<div class="p-6">
-<h3 class="font-bold text-xl">Inferno Pants</h3>
-<p class="text-pyro font-bold text-2xl">$69</p>
-
-<button
-onclick="addToCart('Inferno Pants',69)"
-class="w-full mt-5 bg-pyro py-3 rounded-xl font-bold">
-Add To Cart
-</button>
-</div>
-</div>
-
-</div>
-</div>
-
+    </div>
+  </div>
 </section>
 
 <!-- ABOUT -->
-<section id="about" class="py-24 px-6">
-
-<div class="max-w-4xl mx-auto text-center">
-
-<h2 class="text-5xl font-black mb-8">
-Built For The Bold
-</h2>
-
-<p class="text-gray-400 text-lg leading-relaxed">
-Pyro Fashion combines luxury materials, modern silhouettes,
-and premium craftsmanship to create clothing that stands out.
-Designed for those who move differently.
-</p>
-
-</div>
-
+<section id="about" class="py-32 px-6">
+  <div class="max-w-3xl mx-auto text-center">
+    <p class="text-gold text-[11px] uppercase tracking-[10px] mb-6">Our Philosophy</p>
+    <h2 class="font-display text-5xl md:text-6xl font-bold mb-8">
+      Crafted for the <em class="text-gradient not-italic">Bold</em>
+    </h2>
+    <p class="text-gray-500 text-base md:text-lg leading-relaxed">
+      Pyro Fashion curates only the finest luxury fragrances — scents that command presence,
+      ignite memory, and define character. We believe a fragrance is the most intimate
+      form of self-expression.
+    </p>
+  </div>
 </section>
 
 <!-- FOOTER -->
-<footer class="border-t border-white/10 py-10 text-center text-gray-500">
-© 2026 Pyro Fashion. All rights reserved.
+<footer class="border-t border-white/[0.05] py-12 text-center">
+  <p class="font-display text-base font-bold tracking-[.2em] uppercase mb-2">
+    Pyro <span class="text-gradient">Fashion</span>
+  </p>
+  <p class="text-gray-700 text-sm">© 2026 Pyro Fashion. All rights reserved.</p>
 </footer>
 
-<!-- CART -->
-<div
-id="cart"
-class="fixed top-0 right-[-400px] h-full w-[380px] bg-zinc-950 border-l border-white/10 transition-all duration-300 z-50">
+<!-- CART SIDEBAR -->
+<div id="cart"
+  class="cart-panel fixed top-0 right-[-430px] h-full w-[400px] bg-[#0c0c0c] border-l border-white/[0.06] z-50 overflow-y-auto">
+  <div class="p-8">
 
-<div class="p-6">
+    <div class="flex justify-between items-center mb-8">
+      <h3 class="font-display text-2xl font-bold">Your Bag</h3>
+      <button onclick="toggleCart()" class="text-gray-600 hover:text-white transition w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
 
-<div class="flex justify-between items-center mb-6">
-<h3 class="text-2xl font-bold">Shopping Cart</h3>
+    <div id="cart-items" class="space-y-3"></div>
 
-<button onclick="toggleCart()">
-✕
-</button>
-</div>
+    <div class="mt-8 border-t border-white/[0.06] pt-6">
+      <div class="flex justify-between mb-6 text-base">
+        <span class="text-gray-500">Total</span>
+        <span id="total" class="font-bold text-xl">$0</span>
+      </div>
+      <button onclick="checkout()"
+        class="btn-primary w-full py-4 rounded-xl font-semibold tracking-wide">
+        Checkout
+      </button>
+    </div>
 
-<div id="cart-items" class="space-y-3"></div>
-
-<div class="mt-8 border-t border-white/10 pt-6">
-
-<div class="flex justify-between mb-4">
-<span>Total</span>
-<span id="total">$0</span>
-</div>
-
-<button
-onclick="checkout()"
-class="w-full bg-pyro py-4 rounded-xl font-bold">
-Checkout
-</button>
-
-</div>
-
-</div>
-
+  </div>
 </div>
 
 <script>
-
 let cart = [];
+let cartOpen = false;
 
 function toggleCart() {
-const cartBox = document.getElementById("cart");
-
-if(cartBox.style.right === "0px") {
-cartBox.style.right = "-400px";
-} else {
-cartBox.style.right = "0px";
-}
+  const panel = document.getElementById("cart");
+  cartOpen = !cartOpen;
+  panel.style.right = cartOpen ? "0px" : "-430px";
 }
 
-function addToCart(name, price){
+function addToCart(name, price) {
+  cart.push({ name, price });
+  renderCart();
+  if (!cartOpen) toggleCart();
+}
 
-cart.push({name, price});
+function renderCart() {
+  const items = document.getElementById("cart-items");
+  if (cart.length === 0) {
+    items.innerHTML = '<p class="text-gray-600 text-sm text-center py-10">Your bag is empty.</p>';
+  } else {
+    items.innerHTML = cart.map((item, i) => `
+      <div class="flex justify-between items-center bg-white/[0.04] border border-white/[0.06] px-4 py-3.5 rounded-xl">
+        <div>
+          <p class="text-sm font-medium">${item.name}</p>
+          <p class="text-gray-600 text-xs mt-0.5">Eau de Parfum</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="font-bold">$${item.price}</span>
+          <button onclick="removeFromCart(${i})" class="text-gray-700 hover:text-white transition text-xs">✕</button>
+        </div>
+      </div>
+    `).join('');
+  }
+  const total = cart.reduce((s, i) => s + i.price, 0);
+  document.getElementById("cart-count").innerText = cart.length;
+  document.getElementById("total").innerText = "$" + total;
+}
+
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  renderCart();
+}
+
+function checkout() {
+  alert("Connect Stripe Checkout Session here.");
+}
 
 renderCart();
-}
-
-function renderCart(){
-
-const items = document.getElementById("cart-items");
-
-items.innerHTML = "";
-
-let total = 0;
-
-cart.forEach(item => {
-
-total += item.price;
-
-items.innerHTML += `
-<div class="bg-zinc-900 p-4 rounded-xl flex justify-between">
-<span>${item.name}</span>
-<span>$${item.price}</span>
-</div>
-`;
-
-});
-
-document.getElementById("cart-count").innerText = cart.length;
-document.getElementById("total").innerText = "$" + total;
-
-}
-
-function checkout(){
-
-/*
-REAL STRIPE INTEGRATION
-
-1. Create Stripe Account
-2. Create Checkout Session server-side
-3. Replace this function with Stripe redirect
-
-Example:
-
-window.location.href="/create-checkout-session";
-
-*/
-
-alert("Connect Stripe Checkout Session here.");
-
-}
-
 </script>
 
 </body>
