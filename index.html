@@ -140,16 +140,14 @@ body {
   pointer-events: none;
   background: #0a0a0a;
 }
-.hero-video-bg iframe {
+.hero-video-bg video {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 177.78vh;
-  height: 56.25vw;
-  min-width: 100%;
-  min-height: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   transform: translate(-50%, -50%);
-  border: 0;
 }
 .hero-overlay {
   position: absolute;
@@ -539,10 +537,9 @@ footer {
 <!-- ── HERO ───────────────────────────────────── -->
 <section class="hero">
   <div class="hero-video-bg">
-    <iframe
-      src="https://www.youtube-nocookie.com/embed/7cNWNP9IQfU?autoplay=1&mute=1&loop=1&playlist=7cNWNP9IQfU&controls=0&disablekb=1&fs=0&iv_load_policy=3&modestbranding=1&rel=0&showinfo=0&playsinline=1"
-      allow="autoplay; encrypted-media"
-      title=""></iframe>
+    <video autoplay muted loop playsinline>
+      <source src="https://archive.org/download/beach-waves/Beach%20Waves.mp4" type="video/mp4">
+    </video>
   </div>
   <div class="hero-overlay"></div>
   <div style="position:relative;z-index:1;">
