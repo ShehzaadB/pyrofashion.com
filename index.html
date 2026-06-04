@@ -133,13 +133,31 @@ body {
   color: #fff;
   overflow: hidden;
 }
-.hero-bg-img {
+.hero-video-bg {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(to bottom, rgba(0,0,0,.18) 0%, rgba(0,0,0,.05) 45%, rgba(0,0,0,.52) 100%),
-    url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1800&q=85')
-    center center / cover no-repeat;
+  overflow: hidden;
+  pointer-events: none;
+  background: #0a0a0a;
+}
+.hero-video-bg iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 177.78vh;
+  height: 56.25vw;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  border: 0;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(0,0,0,.25) 0%,
+    rgba(0,0,0,.1)  45%,
+    rgba(0,0,0,.55) 100%);
 }
 .hero-label {
   font-size: 10px;
@@ -520,7 +538,13 @@ footer {
 
 <!-- ── HERO ───────────────────────────────────── -->
 <section class="hero">
-  <div class="hero-bg-img"></div>
+  <div class="hero-video-bg">
+    <iframe
+      src="https://player.vimeo.com/video/570273204?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1"
+      allow="autoplay; fullscreen"
+      title=""></iframe>
+  </div>
+  <div class="hero-overlay"></div>
   <div style="position:relative;z-index:1;">
     <p class="hero-label fade-up d1">2026 Collection</p>
     <h1 class="hero-title fade-up d2">Where Style<br><em>Ignites</em></h1>
