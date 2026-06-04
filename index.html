@@ -3,19 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pyro Fashion | Ignite Your Scent</title>
+<title>Pyro Fashion | Where Style Ignites</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
 tailwind.config = {
   theme: {
     extend: {
-      colors: {
-        pyro: "#ff5a1f",
-        gold: "#c9a84c",
-      },
       fontFamily: {
-        display: ['"Playfair Display"', 'serif'],
+        display: ['"Cormorant Garamond"', 'serif'],
+        sans: ['Inter', 'sans-serif'],
       }
     }
   }
@@ -23,252 +20,565 @@ tailwind.config = {
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-* { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cream:   #F8F5F0;
+  --ink:     #111111;
+  --muted:   #888880;
+  --gold:    #8B6B2A;
+  --border:  #E4DED5;
+  --white:   #FFFFFF;
+}
+
+html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Inter', sans-serif;
-  background: #080808;
+  background: var(--cream);
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
-.hero-bg {
+/* ── NAV ─────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(248,245,240,.95);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 40px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+.nav-logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  list-style: none;
+}
+.nav-links a, .nav-bag-btn {
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  padding: 0;
+  transition: opacity .2s;
+}
+.nav-links a:hover, .nav-bag-btn:hover { opacity: .45; }
+.nav-bag-btn { display: flex; align-items: center; gap: 8px; }
+
+/* ── MARQUEE ─────────────────────────────────── */
+.marquee-bar {
+  background: var(--ink);
+  color: rgba(255,255,255,.55);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 11px 0;
+}
+.marquee-track {
+  display: inline-block;
+  animation: marqueeScroll 30s linear infinite;
+  font-size: 10px;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+}
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── HERO ────────────────────────────────────── */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 80px;
+  text-align: center;
+  color: #fff;
+  overflow: hidden;
+}
+.hero-bg-img {
+  position: absolute;
+  inset: 0;
   background:
-    linear-gradient(135deg, rgba(0,0,0,.75) 0%, rgba(0,0,0,.3) 60%, rgba(0,0,0,.85) 100%),
-    url('https://images.unsplash.com/photo-1541643600914-78b084683702?auto=format&fit=crop&w=1800&q=80');
-  background-size: cover;
-  background-position: center;
+    linear-gradient(to bottom, rgba(0,0,0,.18) 0%, rgba(0,0,0,.05) 45%, rgba(0,0,0,.52) 100%),
+    url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1800&q=85')
+    center center / cover no-repeat;
+}
+.hero-label {
+  font-size: 10px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.55);
+  margin-bottom: 20px;
+}
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.6rem, 9vw, 8rem);
+  font-weight: 300;
+  line-height: 1.0;
+  margin-bottom: 8px;
+}
+.hero-title em {
+  font-style: italic;
+  font-weight: 300;
+}
+.hero-sub {
+  font-size: 10px;
+  letter-spacing: .35em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 40px;
+}
+.btn-ghost-white {
+  display: inline-block;
+  border: 1px solid rgba(255,255,255,.55);
+  color: #fff;
+  font-size: 9px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 13px 38px;
+  transition: border-color .2s, background .2s;
+}
+.btn-ghost-white:hover {
+  border-color: #fff;
+  background: rgba(255,255,255,.1);
 }
 
-.text-gradient {
-  background: linear-gradient(120deg, #ff5a1f 0%, #c9a84c 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* ── SHARED SECTION CHROME ───────────────────── */
+.section-wrap {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 52px;
+}
+.section-eyebrow {
+  font-size: 9px;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.1;
+}
+.section-link {
+  font-size: 9px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink);
+  transition: opacity .2s;
+}
+.section-link:hover { opacity: .45; }
+
+/* ── EDITORIAL GRID ──────────────────────────── */
+.editorial-section { padding: 96px 0; }
+.editorial-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 768px) { .editorial-grid { grid-template-columns: 1fr; } }
+
+.editorial-card { cursor: pointer; }
+.editorial-card-img-wrap {
+  overflow: hidden;
+  height: 600px;
+  position: relative;
+}
+.editorial-card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .8s cubic-bezier(.25,.46,.45,.94);
+  display: block;
+}
+.editorial-card:hover .editorial-card-img-wrap img { transform: scale(1.04); }
+.editorial-card-badge {
+  position: absolute;
+  top: 20px; left: 20px;
+  background: rgba(255,255,255,.92);
+  font-size: 9px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+}
+.editorial-card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 16px;
+}
+.editorial-brand {
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+.editorial-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+.editorial-price {
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
-.gradient-border {
-  background: linear-gradient(#111111, #111111) padding-box,
-              linear-gradient(135deg, rgba(255,90,31,.5), rgba(201,168,76,.5)) border-box;
-  border: 1px solid transparent;
+/* ── QUOTE BAND ──────────────────────────────── */
+.quote-band {
+  background: var(--ink);
+  padding: 96px 40px;
+  text-align: center;
+}
+.quote-band .section-eyebrow { color: rgba(255,255,255,.3); }
+.quote-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 300;
+  font-style: italic;
+  color: #fff;
+  line-height: 1.25;
+  max-width: 820px;
+  margin: 16px auto 0;
 }
 
-.btn-primary {
-  background: linear-gradient(120deg, #ff5a1f, #d97706);
-  box-shadow: 0 0 28px rgba(255,90,31,.3);
-  transition: opacity .2s, box-shadow .2s;
+/* ── SHOP SECTION ────────────────────────────── */
+.shop-section {
+  background: var(--white);
+  padding: 96px 0;
 }
-.btn-primary:hover {
-  opacity: .9;
-  box-shadow: 0 0 40px rgba(255,90,31,.45);
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 340px));
+  gap: 48px 48px;
+}
+@media (max-width: 640px) { .shop-grid { grid-template-columns: 1fr; } }
+
+.product-img-wrap {
+  overflow: hidden;
+  background: #F2EFE9;
+  height: 400px;
+  margin-bottom: 20px;
+}
+.product-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .7s cubic-bezier(.25,.46,.45,.94);
+  display: block;
+}
+.product-card:hover .product-img-wrap img { transform: scale(1.05); }
+
+.product-brand  { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+.product-name   { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; margin-bottom: 4px; }
+.product-detail { font-size: 11px; color: var(--muted); letter-spacing: .04em; margin-bottom: 20px; }
+.product-row    { display: flex; align-items: center; justify-content: space-between; }
+.product-price  { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; }
+
+.btn-outline-dark {
+  border: 1px solid var(--ink);
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  padding: 11px 24px;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: background .2s, color .2s;
+}
+.btn-outline-dark:hover { background: var(--ink); color: var(--cream); }
+
+/* ── ABOUT SECTION ───────────────────────────── */
+.about-section {
+  background: var(--ink);
+  padding: 112px 40px;
+  text-align: center;
+}
+.about-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.4rem, 5.5vw, 4.5rem);
+  font-weight: 300;
+  font-style: italic;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 28px;
+}
+.about-body {
+  font-size: 13px;
+  color: rgba(255,255,255,.42);
+  line-height: 2;
+  letter-spacing: .03em;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.product-card {
-  transition: transform .4s cubic-bezier(.22,.61,.36,1), box-shadow .4s ease;
+/* ── FOOTER ──────────────────────────────────── */
+footer {
+  background: var(--cream);
+  border-top: 1px solid var(--border);
+  padding: 40px;
 }
-.product-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 30px 60px rgba(0,0,0,.5);
+.footer-inner {
+  max-width: 1380px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
 }
-.product-card:hover .card-img {
-  transform: scale(1.07);
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: .25em;
+  text-transform: uppercase;
 }
-.card-img {
-  transition: transform .6s cubic-bezier(.22,.61,.36,1);
+.footer-copy { font-size: 10px; color: var(--muted); letter-spacing: .06em; }
+.footer-links { display: flex; gap: 28px; }
+.footer-links a {
+  font-size: 9px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .2s;
 }
+.footer-links a:hover { color: var(--ink); }
 
-.editorial-card:hover .editorial-img {
-  transform: scale(1.05);
+/* ── CART PANEL ──────────────────────────────── */
+.cart-panel {
+  position: fixed;
+  top: 0; right: -460px;
+  height: 100%;
+  width: 440px;
+  background: var(--white);
+  border-left: 1px solid var(--border);
+  z-index: 200;
+  overflow-y: auto;
+  transition: right .35s cubic-bezier(.25,.46,.45,.94);
 }
-.editorial-img {
-  transition: transform .7s cubic-bezier(.22,.61,.36,1);
+.cart-inner { padding: 36px 36px 48px; }
+.cart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 28px;
 }
+.cart-title { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 400; }
+.cart-close {
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: color .2s;
+}
+.cart-close:hover { color: var(--ink); }
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.cart-item-name { font-size: 13px; margin-bottom: 3px; }
+.cart-item-sub  { font-size: 10px; color: var(--muted); letter-spacing: .05em; }
+.cart-item-right { display: flex; align-items: center; gap: 16px; }
+.cart-item-price { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; }
+.cart-remove {
+  font-size: 9px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: color .2s;
+}
+.cart-remove:hover { color: var(--ink); }
+.cart-footer { margin-top: 28px; }
+.cart-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 24px;
+}
+.cart-total-label { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.cart-total-amt   { font-family: 'Cormorant Garamond', serif; font-size: 2rem; }
+.btn-checkout {
+  width: 100%;
+  background: var(--ink);
+  color: var(--cream);
+  font-size: 9px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  padding: 16px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: opacity .2s;
+}
+.btn-checkout:hover { opacity: .8; }
 
+/* ── ANIMATIONS ──────────────────────────────── */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(36px); }
+  from { opacity: 0; transform: translateY(22px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.fade-up   { animation: fadeUp .9s ease forwards; }
-.delay-1   { animation-delay: .15s; opacity: 0; }
-.delay-2   { animation-delay: .35s; opacity: 0; }
-.delay-3   { animation-delay: .55s; opacity: 0; }
-
-.cart-panel { transition: right .3s cubic-bezier(.22,.61,.36,1); }
+.fade-up   { animation: fadeUp 1s ease forwards; }
+.d1 { animation-delay: .2s; opacity: 0; }
+.d2 { animation-delay: .5s; opacity: 0; }
+.d3 { animation-delay: .8s; opacity: 0; }
 </style>
 </head>
 
-<body class="text-white">
+<body>
 
-<!-- NAVBAR -->
-<header class="fixed top-0 left-0 w-full z-50 bg-black/30 backdrop-blur-2xl border-b border-white/[0.06]">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="flex items-center justify-between h-20">
+<!-- ── NAVBAR ─────────────────────────────────── -->
+<header class="nav">
+  <div class="nav-inner">
+    <ul class="nav-links">
+      <li><a href="#shop">Shop</a></li>
+      <li><a href="#collection">Collection</a></li>
+    </ul>
 
-      <a href="#" class="font-display text-xl font-bold tracking-[.15em] uppercase">
-        Pyro <span class="text-gradient">Fashion</span>
-      </a>
+    <a href="#" class="nav-logo">Pyro Fashion</a>
 
-      <nav class="hidden md:flex gap-10 text-sm font-medium tracking-wide text-gray-400">
-        <a href="#shop"       class="hover:text-white transition-colors duration-200">Shop</a>
-        <a href="#collection" class="hover:text-white transition-colors duration-200">Collection</a>
-        <a href="#about"      class="hover:text-white transition-colors duration-200">About</a>
-      </nav>
-
-      <button onclick="toggleCart()"
-        class="flex items-center gap-2.5 border border-white/20 px-5 py-2.5 rounded-full text-sm font-medium hover:border-white/40 hover:bg-white/5 transition-all duration-200">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+    <div style="display:flex;align-items:center;gap:32px;">
+      <a href="#about" class="nav-links" style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);text-decoration:none;">About</a>
+      <button class="nav-bag-btn" onclick="toggleCart()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
           <line x1="3" y1="6" x2="21" y2="6"/>
           <path d="M16 10a4 4 0 01-8 0"/>
         </svg>
-        Bag&nbsp;<span id="cart-count">0</span>
+        Bag (<span id="cart-count">0</span>)
       </button>
-
     </div>
   </div>
 </header>
 
-<!-- HERO -->
-<section class="hero-bg min-h-screen flex items-center justify-center text-center relative overflow-hidden">
-  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#080808]"></div>
-
-  <div class="relative z-10 max-w-4xl px-6">
-
-    <p class="fade-up delay-1 text-gold text-[11px] uppercase tracking-[10px] mb-6">
-      Fragrance Collection 2026
-    </p>
-
-    <h1 class="fade-up delay-2 font-display font-black leading-none">
-      <span class="block text-7xl md:text-9xl">IGNITE</span>
-      <span class="block text-6xl md:text-8xl italic text-gradient mt-2">Your Scent</span>
-    </h1>
-
-    <p class="fade-up delay-3 mt-8 text-gray-400 text-base md:text-lg max-w-md mx-auto leading-relaxed">
-      Curated luxury fragrances for those who leave a lasting impression.
-    </p>
-
-    <div class="fade-up delay-3 mt-12 flex flex-wrap justify-center gap-4">
-      <a href="#shop"
-        class="btn-primary px-8 py-4 rounded-full font-semibold text-sm tracking-wide">
-        Shop Fragrances
-      </a>
-      <a href="#collection"
-        class="border border-white/15 px-8 py-4 rounded-full text-sm tracking-wide hover:border-white/35 hover:bg-white/5 transition-all duration-200">
-        Explore Collection
-      </a>
-    </div>
-
+<!-- ── HERO ───────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-bg-img"></div>
+  <div style="position:relative;z-index:1;">
+    <p class="hero-label fade-up d1">2026 Collection</p>
+    <h1 class="hero-title fade-up d2">Where Style<br><em>Ignites</em></h1>
+    <p class="hero-sub fade-up d3">Fashion &nbsp;·&nbsp; Fragrance &nbsp;·&nbsp; Fine Living</p>
+    <a href="#collection" class="btn-ghost-white fade-up d3">Discover the Collection</a>
   </div>
 </section>
 
-<!-- EDITORIAL COLLECTION -->
-<section id="collection" class="py-32 px-6">
-  <div class="max-w-7xl mx-auto">
+<!-- ── MARQUEE ────────────────────────────────── -->
+<div class="marquee-bar">
+  <span class="marquee-track">
+    New Arrivals 2026 &nbsp;&nbsp;&mdash;&nbsp;&nbsp; LV Météore &nbsp;&nbsp;&mdash;&nbsp;&nbsp; Tom Ford Vanilla Sex &nbsp;&nbsp;&mdash;&nbsp;&nbsp; Exclusive Fragrances &nbsp;&nbsp;&mdash;&nbsp;&nbsp; Premium Fashion &nbsp;&nbsp;&mdash;&nbsp;&nbsp; Free Shipping Over $150 &nbsp;&nbsp;&mdash;&nbsp;&nbsp; New Arrivals 2026 &nbsp;&nbsp;&mdash;&nbsp;&nbsp; LV Météore &nbsp;&nbsp;&mdash;&nbsp;&nbsp; Tom Ford Vanilla Sex &nbsp;&nbsp;&mdash;&nbsp;&nbsp; Exclusive Fragrances &nbsp;&nbsp;&mdash;&nbsp;&nbsp; Premium Fashion &nbsp;&nbsp;&mdash;&nbsp;&nbsp; Free Shipping Over $150 &nbsp;&nbsp;&mdash;&nbsp;&nbsp;
+  </span>
+</div>
 
-    <div class="text-center mb-20">
-      <p class="text-gold text-[11px] uppercase tracking-[10px] mb-4">Curated Selection</p>
-      <h2 class="font-display text-5xl md:text-6xl font-bold">The Collection</h2>
-    </div>
+<!-- ── EDITORIAL COLLECTION ───────────────────── -->
+<section class="editorial-section" id="collection">
+  <div class="section-wrap">
 
-    <div class="grid md:grid-cols-2 gap-5">
-
-      <!-- LV Meteore -->
-      <div class="editorial-card relative overflow-hidden rounded-3xl h-[580px] group cursor-pointer">
-        <img
-          src="https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?auto=format&fit=crop&w=1200&q=80"
-          class="editorial-img w-full h-full object-cover"
-          alt="LV Météore">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent"></div>
-        <div class="absolute bottom-0 left-0 p-10">
-          <p class="text-gold text-[10px] tracking-[8px] uppercase mb-2">Louis Vuitton</p>
-          <h3 class="font-display text-4xl font-bold mb-3">Météore</h3>
-          <p class="text-gray-400 text-sm leading-relaxed max-w-xs">
-            A fresh, luminous trail — bergamot, white musk, and a streak of solar warmth.
-          </p>
-          <a href="#shop" class="mt-6 inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors border-b border-white/20 pb-0.5">
-            Shop Now <span>→</span>
-          </a>
-        </div>
+    <div class="section-header">
+      <div>
+        <p class="section-eyebrow">Fragrance</p>
+        <h2 class="section-title">The Collection</h2>
       </div>
-
-      <!-- Tom Ford Vanilla Sex -->
-      <div class="editorial-card relative overflow-hidden rounded-3xl h-[580px] group cursor-pointer">
-        <img
-          src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?auto=format&fit=crop&w=1200&q=80"
-          class="editorial-img w-full h-full object-cover"
-          alt="Tom Ford Vanilla Sex">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent"></div>
-        <div class="absolute bottom-0 left-0 p-10">
-          <p class="text-gold text-[10px] tracking-[8px] uppercase mb-2">Tom Ford</p>
-          <h3 class="font-display text-4xl font-bold mb-3">Vanilla Sex</h3>
-          <p class="text-gray-400 text-sm leading-relaxed max-w-xs">
-            Bold, sensual, unapologetic. Dark vanilla, amber, and black pepper ignite the senses.
-          </p>
-          <a href="#shop" class="mt-6 inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors border-b border-white/20 pb-0.5">
-            Shop Now <span>→</span>
-          </a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- SHOP -->
-<section id="shop" class="py-24 px-6 bg-black">
-  <div class="max-w-7xl mx-auto">
-
-    <div class="text-center mb-16">
-      <p class="text-gold text-[11px] uppercase tracking-[10px] mb-4">Luxury Fragrances</p>
-      <h2 class="font-display text-5xl md:text-6xl font-bold">Shop Now</h2>
+      <a href="#shop" class="section-link">View All &rarr;</a>
     </div>
 
-    <div class="grid sm:grid-cols-2 gap-8 max-w-2xl mx-auto">
+    <div class="editorial-grid">
 
       <!-- LV Météore -->
-      <div class="product-card gradient-border rounded-3xl overflow-hidden bg-[#0f0f0f]">
-        <div class="overflow-hidden h-72">
-          <img
-            src="https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?auto=format&fit=crop&w=900&q=80"
-            class="card-img h-72 w-full object-cover"
-            alt="LV Météore">
+      <div class="editorial-card" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">
+        <div class="editorial-card-img-wrap">
+          <img src="https://imagedelivery.net/dTnWiVKich4PS2lEWud18g/fbf282c9-a81b-439d-cb75-0c840e58b300/public"
+               alt="Louis Vuitton Météore">
+          <div class="editorial-card-badge">New</div>
         </div>
-        <div class="p-7">
-          <p class="text-gold text-[10px] tracking-[6px] uppercase mb-1">Louis Vuitton</p>
-          <h3 class="font-display text-2xl font-bold mt-1">Météore</h3>
-          <p class="text-gray-600 text-xs mt-1.5 mb-5">100 ml · Eau de Parfum</p>
-          <div class="flex items-end justify-between">
-            <span class="text-3xl font-bold">$340</span>
+        <div class="editorial-card-meta">
+          <div>
+            <p class="editorial-brand">Louis Vuitton</p>
+            <p class="editorial-name">Météore</p>
           </div>
-          <button
-            onclick="addToCart('LV Météore', 340)"
-            class="btn-primary w-full mt-5 py-3.5 rounded-xl font-semibold text-sm tracking-wide">
-            Add to Bag
-          </button>
+          <span class="editorial-price">$340</span>
         </div>
       </div>
 
       <!-- Tom Ford Vanilla Sex -->
-      <div class="product-card gradient-border rounded-3xl overflow-hidden bg-[#0f0f0f]">
-        <div class="overflow-hidden h-72">
-          <img
-            src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?auto=format&fit=crop&w=900&q=80"
-            class="card-img h-72 w-full object-cover"
-            alt="Tom Ford Vanilla Sex">
+      <div class="editorial-card" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">
+        <div class="editorial-card-img-wrap">
+          <img src="https://n.nordstrommedia.com/it/cac567cf-cc66-4f05-bf2e-4b21b2fc3722.jpeg"
+               alt="Tom Ford Vanilla Sex">
+          <div class="editorial-card-badge">Bestseller</div>
         </div>
-        <div class="p-7">
-          <p class="text-gold text-[10px] tracking-[6px] uppercase mb-1">Tom Ford</p>
-          <h3 class="font-display text-2xl font-bold mt-1">Vanilla Sex</h3>
-          <p class="text-gray-600 text-xs mt-1.5 mb-5">50 ml · Eau de Parfum</p>
-          <div class="flex items-end justify-between">
-            <span class="text-3xl font-bold">$215</span>
+        <div class="editorial-card-meta">
+          <div>
+            <p class="editorial-brand">Tom Ford</p>
+            <p class="editorial-name">Vanilla Sex</p>
           </div>
-          <button
-            onclick="addToCart('Tom Ford Vanilla Sex', 215)"
-            class="btn-primary w-full mt-5 py-3.5 rounded-xl font-semibold text-sm tracking-wide">
-            Add to Bag
-          </button>
+          <span class="editorial-price">$215</span>
         </div>
       </div>
 
@@ -276,54 +586,98 @@ body {
   </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about" class="py-32 px-6">
-  <div class="max-w-3xl mx-auto text-center">
-    <p class="text-gold text-[11px] uppercase tracking-[10px] mb-6">Our Philosophy</p>
-    <h2 class="font-display text-5xl md:text-6xl font-bold mb-8">
-      Crafted for the <em class="text-gradient not-italic">Bold</em>
-    </h2>
-    <p class="text-gray-500 text-base md:text-lg leading-relaxed">
-      Pyro Fashion curates only the finest luxury fragrances — scents that command presence,
-      ignite memory, and define character. We believe a fragrance is the most intimate
-      form of self-expression.
-    </p>
+<!-- ── QUOTE BAND ─────────────────────────────── -->
+<div class="quote-band">
+  <p class="section-eyebrow">Pyro Fashion</p>
+  <p class="quote-text">"The most intimate form&nbsp;of&nbsp;self-expression."</p>
+</div>
+
+<!-- ── SHOP ───────────────────────────────────── -->
+<section class="shop-section" id="shop">
+  <div class="section-wrap">
+
+    <div class="section-header">
+      <div>
+        <p class="section-eyebrow">Curated Fragrances</p>
+        <h2 class="section-title">Shop</h2>
+      </div>
+    </div>
+
+    <div class="shop-grid">
+
+      <!-- LV Météore product -->
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="https://imagedelivery.net/dTnWiVKich4PS2lEWud18g/fbf282c9-a81b-439d-cb75-0c840e58b300/public"
+               alt="Louis Vuitton Météore">
+        </div>
+        <p class="product-brand">Louis Vuitton</p>
+        <h3 class="product-name">Météore</h3>
+        <p class="product-detail">Eau de Parfum &nbsp;·&nbsp; 100 ml</p>
+        <div class="product-row">
+          <span class="product-price">$340</span>
+          <button class="btn-outline-dark" onclick="addToCart('LV Météore', 340)">Add to Bag</button>
+        </div>
+      </div>
+
+      <!-- Tom Ford Vanilla Sex product -->
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="https://n.nordstrommedia.com/it/cac567cf-cc66-4f05-bf2e-4b21b2fc3722.jpeg"
+               alt="Tom Ford Vanilla Sex">
+        </div>
+        <p class="product-brand">Tom Ford</p>
+        <h3 class="product-name">Vanilla Sex</h3>
+        <p class="product-detail">Eau de Parfum &nbsp;·&nbsp; 50 ml</p>
+        <div class="product-row">
+          <span class="product-price">$215</span>
+          <button class="btn-outline-dark" onclick="addToCart('Tom Ford Vanilla Sex', 215)">Add to Bag</button>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer class="border-t border-white/[0.05] py-12 text-center">
-  <p class="font-display text-base font-bold tracking-[.2em] uppercase mb-2">
-    Pyro <span class="text-gradient">Fashion</span>
+<!-- ── ABOUT ───────────────────────────────────── -->
+<section class="about-section" id="about">
+  <p class="section-eyebrow" style="color:rgba(255,255,255,.28);letter-spacing:.26em;margin-bottom:20px;">Our Philosophy</p>
+  <h2 class="about-title">Crafted for the Bold</h2>
+  <p class="about-body">
+    Pyro Fashion is a curated house of luxury — from precision-crafted clothing to the world's finest fragrances. We source only what ignites the senses, built for those who move through the world with intention and leave an impression that lingers.
   </p>
-  <p class="text-gray-700 text-sm">© 2026 Pyro Fashion. All rights reserved.</p>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <span class="footer-logo">Pyro Fashion</span>
+    <p class="footer-copy">© 2026 Pyro Fashion. All rights reserved.</p>
+    <nav class="footer-links">
+      <a href="#">Instagram</a>
+      <a href="#">Contact</a>
+      <a href="#">Privacy</a>
+    </nav>
+  </div>
 </footer>
 
-<!-- CART SIDEBAR -->
-<div id="cart"
-  class="cart-panel fixed top-0 right-[-430px] h-full w-[400px] bg-[#0c0c0c] border-l border-white/[0.06] z-50 overflow-y-auto">
-  <div class="p-8">
+<!-- ── CART PANEL ─────────────────────────────── -->
+<div class="cart-panel" id="cart">
+  <div class="cart-inner">
 
-    <div class="flex justify-between items-center mb-8">
-      <h3 class="font-display text-2xl font-bold">Your Bag</h3>
-      <button onclick="toggleCart()" class="text-gray-600 hover:text-white transition w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-        </svg>
-      </button>
+    <div class="cart-header">
+      <span class="cart-title">Your Bag</span>
+      <button class="cart-close" onclick="toggleCart()">Close</button>
     </div>
 
-    <div id="cart-items" class="space-y-3"></div>
+    <div id="cart-items"></div>
 
-    <div class="mt-8 border-t border-white/[0.06] pt-6">
-      <div class="flex justify-between mb-6 text-base">
-        <span class="text-gray-500">Total</span>
-        <span id="total" class="font-bold text-xl">$0</span>
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span class="cart-total-label">Total</span>
+        <span class="cart-total-amt" id="total">$0</span>
       </div>
-      <button onclick="checkout()"
-        class="btn-primary w-full py-4 rounded-xl font-semibold tracking-wide">
-        Checkout
-      </button>
+      <button class="btn-checkout" onclick="checkout()">Checkout</button>
     </div>
 
   </div>
@@ -334,9 +688,8 @@ let cart = [];
 let cartOpen = false;
 
 function toggleCart() {
-  const panel = document.getElementById("cart");
   cartOpen = !cartOpen;
-  panel.style.right = cartOpen ? "0px" : "-430px";
+  document.getElementById('cart').style.right = cartOpen ? '0px' : '-460px';
 }
 
 function addToCart(name, price) {
@@ -345,36 +698,36 @@ function addToCart(name, price) {
   if (!cartOpen) toggleCart();
 }
 
+function removeFromCart(i) {
+  cart.splice(i, 1);
+  renderCart();
+}
+
 function renderCart() {
-  const items = document.getElementById("cart-items");
-  if (cart.length === 0) {
-    items.innerHTML = '<p class="text-gray-600 text-sm text-center py-10">Your bag is empty.</p>';
+  const el = document.getElementById('cart-items');
+  if (!cart.length) {
+    el.innerHTML = '<p style="font-size:11px;color:var(--muted);text-align:center;padding:36px 0;letter-spacing:.08em;">Your bag is empty.</p>';
   } else {
-    items.innerHTML = cart.map((item, i) => `
-      <div class="flex justify-between items-center bg-white/[0.04] border border-white/[0.06] px-4 py-3.5 rounded-xl">
+    el.innerHTML = cart.map((item, i) => `
+      <div class="cart-item">
         <div>
-          <p class="text-sm font-medium">${item.name}</p>
-          <p class="text-gray-600 text-xs mt-0.5">Eau de Parfum</p>
+          <p class="cart-item-name">${item.name}</p>
+          <p class="cart-item-sub">Eau de Parfum</p>
         </div>
-        <div class="flex items-center gap-3">
-          <span class="font-bold">$${item.price}</span>
-          <button onclick="removeFromCart(${i})" class="text-gray-700 hover:text-white transition text-xs">✕</button>
+        <div class="cart-item-right">
+          <span class="cart-item-price">$${item.price}</span>
+          <button class="cart-remove" onclick="removeFromCart(${i})">Remove</button>
         </div>
       </div>
     `).join('');
   }
-  const total = cart.reduce((s, i) => s + i.price, 0);
-  document.getElementById("cart-count").innerText = cart.length;
-  document.getElementById("total").innerText = "$" + total;
-}
-
-function removeFromCart(index) {
-  cart.splice(index, 1);
-  renderCart();
+  const total = cart.reduce((s, item) => s + item.price, 0);
+  document.getElementById('cart-count').textContent = cart.length;
+  document.getElementById('total').textContent = '$' + total;
 }
 
 function checkout() {
-  alert("Connect Stripe Checkout Session here.");
+  alert('Connect Stripe Checkout Session here.');
 }
 
 renderCart();
