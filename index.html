@@ -138,15 +138,19 @@ body {
   inset: 0;
   overflow: hidden;
   pointer-events: none;
-  background:
-    url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1800&q=90')
-    center center / cover no-repeat;
-  animation: heroZoom 22s ease-in-out infinite alternate;
-  will-change: transform;
+  background: #001122;
 }
-@keyframes heroZoom {
-  from { transform: scale(1.0); }
-  to   { transform: scale(1.08); }
+.hero-video-bg iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 177.78vh;
+  height: 56.25vw;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  border: 0;
+  pointer-events: none;
 }
 .hero-overlay {
   position: absolute;
@@ -535,7 +539,14 @@ footer {
 
 <!-- ── HERO ───────────────────────────────────── -->
 <section class="hero">
-  <div class="hero-video-bg"></div>
+  <div class="hero-video-bg">
+    <iframe
+      src="https://www.youtube-nocookie.com/embed/oGGHE6YXBlo?autoplay=1&mute=1&loop=1&playlist=oGGHE6YXBlo&controls=0&disablekb=1&fs=0&iv_load_policy=3&modestbranding=1&rel=0&showinfo=0&playsinline=1"
+      allow="autoplay; encrypted-media"
+      title=""
+      tabindex="-1">
+    </iframe>
+  </div>
   <div class="hero-overlay"></div>
   <div style="position:relative;z-index:1;">
     <p class="hero-label fade-up d1">2026 Collection</p>
