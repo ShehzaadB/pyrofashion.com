@@ -152,6 +152,18 @@ body {
   border: 0;
   pointer-events: none;
 }
+.hero-video-cover {
+  position: absolute;
+  inset: 0;
+  background: #001122;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.8s ease;
+}
+.hero-video-cover.fade {
+  opacity: 0;
+}
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -508,6 +520,51 @@ footer {
 .d1 { animation-delay: .2s; opacity: 0; }
 .d2 { animation-delay: .5s; opacity: 0; }
 .d3 { animation-delay: .8s; opacity: 0; }
+
+/* ── MOBILE ──────────────────────────────────── */
+@media (max-width: 768px) {
+  .nav-inner { padding: 0 20px; height: 56px; }
+  .nav-links { gap: 20px; }
+
+  .section-wrap { padding: 0 20px; }
+
+  .hero { min-height: 520px; padding-bottom: 60px; }
+
+  .editorial-section { padding: 60px 0; }
+  .editorial-card-img-wrap { height: 340px; }
+  .section-header { margin-bottom: 32px; flex-wrap: wrap; gap: 12px; }
+
+  .shop-section { padding: 60px 0; }
+  .shop-grid {
+    grid-template-columns: 1fr;
+    max-width: 360px;
+    margin: 0 auto;
+    gap: 40px;
+  }
+  .product-img-wrap { height: 320px; }
+
+  .quote-band { padding: 64px 20px; }
+  .about-section { padding: 72px 20px; }
+
+  .coming-soon-banner { padding: 36px 24px !important; }
+
+  .cart-panel { width: 100%; }
+
+  footer { padding: 28px 20px; }
+  .footer-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
+}
+
+@media (max-width: 480px) {
+  .nav-links { display: none; }
+  .nav-logo { font-size: 18px; letter-spacing: .2em; }
+
+  .hero-title { font-size: clamp(3rem, 13vw, 5rem); }
+
+  .editorial-card-img-wrap { height: 260px; }
+  .product-img-wrap { height: 280px; }
+
+  .cart-inner { padding: 24px 20px 36px; }
+}
 </style>
 </head>
 
@@ -546,6 +603,7 @@ footer {
       title=""
       tabindex="-1">
     </iframe>
+    <div class="hero-video-cover" id="heroVideoCover"></div>
   </div>
   <div class="hero-overlay"></div>
   <div style="position:relative;z-index:1;">
@@ -612,7 +670,7 @@ footer {
     </div>
 
     <!-- Coming Soon -->
-    <div style="margin-top:48px; border:1px solid var(--border); padding:48px 40px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;">
+    <div class="coming-soon-banner" style="margin-top:48px; border:1px solid var(--border); padding:48px 40px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;">
       <div>
         <p class="section-eyebrow" style="margin-bottom:8px;">Coming Soon</p>
         <h3 style="font-family:'Cormorant Garamond',serif; font-size:clamp(1.6rem,3vw,2.4rem); font-weight:400;">New Luxury Clothing Collection</h3>
@@ -720,6 +778,11 @@ footer {
 </div>
 
 <script>
+setTimeout(function(){
+  var c = document.getElementById('heroVideoCover');
+  if(c) c.style.opacity = '0';
+}, 1500);
+
 let cart = [];
 let cartOpen = false;
 
