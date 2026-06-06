@@ -582,14 +582,6 @@ footer {
 
     <div style="display:flex;align-items:center;gap:32px;">
       <a href="#about" class="nav-links" style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);text-decoration:none;">About</a>
-      <button class="nav-bag-btn" onclick="toggleCart()">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
-          <line x1="3" y1="6" x2="21" y2="6"/>
-          <path d="M16 10a4 4 0 01-8 0"/>
-        </svg>
-        Bag (<span id="cart-count">0</span>)
-      </button>
     </div>
   </div>
 </header>
@@ -711,7 +703,7 @@ footer {
         <p class="product-detail">Eau de Parfum &nbsp;·&nbsp; 100 ml &nbsp;·&nbsp; Lightly Used</p>
         <div class="product-row">
           <span class="product-price">$275</span>
-          <button class="btn-outline-dark" onclick="addToCart('LV Météore', 275)">Add to Bag</button>
+          <a href="https://buy.stripe.com/7sY9ASab0dVGaKS6pI9k400" target="_blank" rel="noopener" class="btn-outline-dark">Buy Now</a>
         </div>
       </div>
 
@@ -726,7 +718,7 @@ footer {
         <p class="product-detail">Eau de Parfum &nbsp;·&nbsp; 50 ml &nbsp;·&nbsp; Lightly Used</p>
         <div class="product-row">
           <span class="product-price">$275</span>
-          <button class="btn-outline-dark" onclick="addToCart('Tom Ford Vanilla Sex', 275)">Add to Bag</button>
+          <a href="https://buy.stripe.com/14AcN46YO4l69GOeWe9k401" target="_blank" rel="noopener" class="btn-outline-dark">Buy Now</a>
         </div>
       </div>
 
@@ -755,81 +747,11 @@ footer {
   </div>
 </footer>
 
-<!-- ── CART PANEL ─────────────────────────────── -->
-<div class="cart-panel" id="cart">
-  <div class="cart-inner">
-
-    <div class="cart-header">
-      <span class="cart-title">Your Bag</span>
-      <button class="cart-close" onclick="toggleCart()">Close</button>
-    </div>
-
-    <div id="cart-items"></div>
-
-    <div class="cart-footer">
-      <div class="cart-total-row">
-        <span class="cart-total-label">Total</span>
-        <span class="cart-total-amt" id="total">$0</span>
-      </div>
-      <button class="btn-checkout" onclick="checkout()">Checkout</button>
-    </div>
-
-  </div>
-</div>
-
 <script>
 setTimeout(function(){
   var c = document.getElementById('heroVideoCover');
   if(c) c.style.opacity = '0';
 }, 1500);
-
-let cart = [];
-let cartOpen = false;
-
-function toggleCart() {
-  cartOpen = !cartOpen;
-  document.getElementById('cart').style.right = cartOpen ? '0px' : '-460px';
-}
-
-function addToCart(name, price) {
-  cart.push({ name, price });
-  renderCart();
-  if (!cartOpen) toggleCart();
-}
-
-function removeFromCart(i) {
-  cart.splice(i, 1);
-  renderCart();
-}
-
-function renderCart() {
-  const el = document.getElementById('cart-items');
-  if (!cart.length) {
-    el.innerHTML = '<p style="font-size:11px;color:var(--muted);text-align:center;padding:36px 0;letter-spacing:.08em;">Your bag is empty.</p>';
-  } else {
-    el.innerHTML = cart.map((item, i) => `
-      <div class="cart-item">
-        <div>
-          <p class="cart-item-name">${item.name}</p>
-          <p class="cart-item-sub">Eau de Parfum</p>
-        </div>
-        <div class="cart-item-right">
-          <span class="cart-item-price">$${item.price}</span>
-          <button class="cart-remove" onclick="removeFromCart(${i})">Remove</button>
-        </div>
-      </div>
-    `).join('');
-  }
-  const total = cart.reduce((s, item) => s + item.price, 0);
-  document.getElementById('cart-count').textContent = cart.length;
-  document.getElementById('total').textContent = '$' + total;
-}
-
-function checkout() {
-  alert('Connect Stripe Checkout Session here.');
-}
-
-renderCart();
 </script>
 
 </body>
