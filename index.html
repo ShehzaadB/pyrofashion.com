@@ -590,7 +590,8 @@ footer {
 <section class="hero">
   <div class="hero-video-bg">
     <iframe
-      src="https://www.youtube-nocookie.com/embed/oGGHE6YXBlo?autoplay=1&mute=1&loop=1&playlist=oGGHE6YXBlo&controls=0&disablekb=1&fs=0&iv_load_policy=3&modestbranding=1&rel=0&showinfo=0&playsinline=1"
+      id="heroVideoFrame"
+      src="https://www.youtube-nocookie.com/embed/oGGHE6YXBlo?autoplay=1&mute=1&loop=1&playlist=oGGHE6YXBlo&controls=0&disablekb=1&fs=0&iv_load_policy=3&modestbranding=1&rel=0&showinfo=0&playsinline=1&enablejsapi=1"
       allow="autoplay; encrypted-media"
       title=""
       tabindex="-1">
@@ -717,10 +718,41 @@ footer {
 </footer>
 
 <script>
-setTimeout(function(){
-  var c = document.getElementById('heroVideoCover');
-  if(c) c.style.opacity = '0';
-}, 1500);
+(function(){
+  var cover = document.getElementById('heroVideoCover');
+  var frame = document.getElementById('heroVideoFrame');
+  if(!cover || !frame) return;
+
+  var revealed = false;
+  function reveal(){
+    if(revealed) return;
+    revealed = true;
+    cover.style.opacity = '0';
+  }
+
+  // Fallback in case the API never loads / autoplay is blocked —
+  // don't leave the hero covered forever.
+  var fallback = setTimeout(reveal, 3000);
+
+  var tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(tag);
+
+  window.onYouTubeIframeAPIReady = function(){
+    new YT.Player('heroVideoFrame', {
+      events: {
+        onStateChange: function(e){
+          // Only lift the cover once the video is actually playing,
+          // so the paused-state/play-button watermark never shows through.
+          if(e.data === YT.PlayerState.PLAYING){
+            clearTimeout(fallback);
+            reveal();
+          }
+        }
+      }
+    });
+  };
+})();
 </script>
 
 </body>
