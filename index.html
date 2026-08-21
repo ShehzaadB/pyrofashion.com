@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pyro Fashion | Where Style Ignites</title>
+<link rel="icon" type="image/png" href="PyroFashion_Icon_Badge_OnIvory.png">
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
@@ -68,14 +69,15 @@ body {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
-  font-weight: 600;
-  letter-spacing: .28em;
-  text-transform: uppercase;
-  color: var(--ink);
+  display: flex;
+  align-items: center;
   text-decoration: none;
   white-space: nowrap;
+}
+.nav-logo img {
+  height: 38px;
+  width: auto;
+  display: block;
 }
 .nav-links {
   display: flex;
@@ -401,11 +403,13 @@ footer {
   gap: 16px;
 }
 .footer-logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: .25em;
-  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+.footer-logo img {
+  height: 30px;
+  width: auto;
+  display: block;
 }
 .footer-copy { font-size: 10px; color: var(--muted); letter-spacing: .06em; }
 .footer-links { display: flex; gap: 28px; }
@@ -545,7 +549,7 @@ footer {
 
 @media (max-width: 480px) {
   .nav-links { display: none; }
-  .nav-logo { font-size: 18px; letter-spacing: .2em; }
+  .nav-logo img { height: 30px; }
 
   .hero-title { font-size: clamp(3rem, 13vw, 5rem); }
 
@@ -567,7 +571,7 @@ footer {
       <li><a href="#collection">Collection</a></li>
     </ul>
 
-    <a href="#" class="nav-logo">Pyro Fashion</a>
+    <a href="#" class="nav-logo"><img src="PyroFashion_Icon_Badge_OnIvory.png" alt="Pyro Fashion"></a>
 
     <div style="display:flex;align-items:center;gap:32px;">
       <a href="#about" class="nav-links" style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);text-decoration:none;">About</a>
@@ -694,7 +698,7 @@ footer {
 <!-- ── FOOTER ─────────────────────────────────── -->
 <footer>
   <div class="footer-inner">
-    <span class="footer-logo">Pyro Fashion</span>
+    <span class="footer-logo"><img src="PyroFashion_Icon_Badge_OnIvory.png" alt="Pyro Fashion"></span>
     <p class="footer-copy">© 2026 Pyro Fashion. All rights reserved.</p>
     <nav class="footer-links">
       <a href="mailto:pyroluxury@gmail.com">pyroluxury@gmail.com</a>
