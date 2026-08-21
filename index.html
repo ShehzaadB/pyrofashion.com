@@ -590,8 +590,7 @@ footer {
 <section class="hero">
   <div class="hero-video-bg">
     <iframe
-      id="heroVideoFrame"
-      src="https://www.youtube-nocookie.com/embed/oGGHE6YXBlo?autoplay=1&mute=1&loop=1&playlist=oGGHE6YXBlo&controls=0&disablekb=1&fs=0&iv_load_policy=3&modestbranding=1&rel=0&showinfo=0&playsinline=1&enablejsapi=1"
+      src="https://www.youtube-nocookie.com/embed/oGGHE6YXBlo?autoplay=1&mute=1&loop=1&playlist=oGGHE6YXBlo&controls=0&disablekb=1&fs=0&iv_load_policy=3&modestbranding=1&rel=0&showinfo=0&playsinline=1"
       allow="autoplay; encrypted-media"
       title=""
       tabindex="-1">
@@ -600,9 +599,8 @@ footer {
   </div>
   <div class="hero-overlay"></div>
   <div style="position:relative;z-index:1;">
-    <p class="hero-label fade-up d1">2026 Collection</p>
     <h1 class="hero-title fade-up d2">Where Style<br><em>Ignites</em></h1>
-    <p class="hero-sub fade-up d3">Fashion &nbsp;·&nbsp; Fragrance &nbsp;·&nbsp; Fine Living</p>
+    <p class="hero-sub fade-up d3">Fashion &nbsp;·&nbsp; Fine Living</p>
     <a href="#collection" class="btn-ghost-white fade-up d3">Discover the Collection</a>
   </div>
 </section>
@@ -718,48 +716,15 @@ footer {
 </footer>
 
 <script>
-(function(){
-  var cover = document.getElementById('heroVideoCover');
-  var frame = document.getElementById('heroVideoFrame');
-  if(!cover || !frame) return;
-
-  var revealed = false;
-  function reveal(){
-    if(revealed) return;
-    revealed = true;
-    cover.style.opacity = '0';
-  }
-
-  // Fallback in case the API never loads (blocked by an extension,
-  // slow network, etc) — don't leave the hero covered forever.
-  var fallback = setTimeout(reveal, 4000);
-
-  var tag = document.createElement('script');
-  tag.src = 'https://www.youtube.com/iframe_api';
-  document.head.appendChild(tag);
-
-  window.onYouTubeIframeAPIReady = function(){
-    new YT.Player('heroVideoFrame', {
-      events: {
-        onReady: function(e){
-          // Force playback explicitly — URL autoplay params alone are
-          // unreliable in some browsers/embedded webviews.
-          e.target.mute();
-          e.target.playVideo();
-        },
-        onStateChange: function(e){
-          if(e.data === YT.PlayerState.PLAYING){
-            clearTimeout(fallback);
-            // YouTube's own "playback started" icon briefly flashes the
-            // instant the state flips to playing — wait it out behind
-            // the cover before revealing.
-            setTimeout(reveal, 600);
-          }
-        }
-      }
-    });
-  };
-})();
+// YouTube embeds show a centered rewind/pause/forward control cluster
+// for the first few seconds after load, regardless of the controls=0
+// param or playback state — there's no supported way to suppress it.
+// It reliably auto-hides by ~5s, so we just keep the cover up that
+// long and reveal after it's guaranteed to be gone.
+setTimeout(function(){
+  var c = document.getElementById('heroVideoCover');
+  if(c) c.style.opacity = '0';
+}, 5200);
 </script>
 
 </body>
