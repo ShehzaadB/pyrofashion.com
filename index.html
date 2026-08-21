@@ -100,6 +100,52 @@ body {
 .nav-links a:hover, .nav-bag-btn:hover { opacity: .45; }
 .nav-bag-btn { display: flex; align-items: center; gap: 8px; }
 
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 22px;
+  height: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.nav-toggle span {
+  display: block;
+  height: 1px;
+  width: 100%;
+  background: var(--ink);
+  transition: transform .25s ease, opacity .25s ease;
+}
+.nav-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+.nav-mobile-menu {
+  display: none;
+  flex-direction: column;
+  max-height: 0;
+  overflow: hidden;
+  background: var(--cream);
+  border-top: 1px solid transparent;
+  transition: max-height .3s ease;
+}
+.nav-mobile-menu.open {
+  max-height: 220px;
+  border-top-color: var(--border);
+}
+.nav-mobile-menu a {
+  padding: 16px 20px;
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+}
+
 /* ── MARQUEE ─────────────────────────────────── */
 .marquee-bar {
   background: var(--ink);
@@ -549,6 +595,8 @@ footer {
 @media (max-width: 480px) {
   .nav-links { display: none; }
   .nav-logo { font-size: 18px; letter-spacing: .2em; }
+  .nav-toggle { display: flex; }
+  .nav-mobile-menu { display: flex; }
 
   .hero-title { font-size: clamp(3rem, 13vw, 5rem); }
 
@@ -574,7 +622,15 @@ footer {
 
     <div style="display:flex;align-items:center;gap:32px;">
       <a href="#about" class="nav-links" style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);text-decoration:none;">About</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </div>
+  <div class="nav-mobile-menu" id="navMobileMenu">
+    <a href="#shop">Shop</a>
+    <a href="#collection">Collection</a>
+    <a href="#about">About</a>
   </div>
 </header>
 
@@ -716,6 +772,23 @@ if (heroVideo) {
   // canplay is the more reliable fallback signal.
   heroVideo.addEventListener('canplay', function(){
     heroVideo.classList.add('ready');
+  });
+}
+
+var navToggle = document.getElementById('navToggle');
+var navMobileMenu = document.getElementById('navMobileMenu');
+if (navToggle && navMobileMenu) {
+  navToggle.addEventListener('click', function(){
+    var isOpen = navMobileMenu.classList.toggle('open');
+    navToggle.classList.toggle('open', isOpen);
+    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  navMobileMenu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      navMobileMenu.classList.remove('open');
+      navToggle.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
   });
 }
 </script>
