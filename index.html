@@ -69,15 +69,14 @@ body {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  display: flex;
-  align-items: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--ink);
   text-decoration: none;
   white-space: nowrap;
-}
-.nav-logo img {
-  height: 38px;
-  width: auto;
-  display: block;
 }
 .nav-links {
   display: flex;
@@ -549,7 +548,7 @@ footer {
 
 @media (max-width: 480px) {
   .nav-links { display: none; }
-  .nav-logo img { height: 30px; }
+  .nav-logo { font-size: 18px; letter-spacing: .2em; }
 
   .hero-title { font-size: clamp(3rem, 13vw, 5rem); }
 
@@ -571,7 +570,7 @@ footer {
       <li><a href="#collection">Collection</a></li>
     </ul>
 
-    <a href="#" class="nav-logo"><img src="PyroFashion_Icon_Badge_OnIvory.png" alt="Pyro Fashion"></a>
+    <a href="#" class="nav-logo">Pyro Fashion</a>
 
     <div style="display:flex;align-items:center;gap:32px;">
       <a href="#about" class="nav-links" style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);text-decoration:none;">About</a>
