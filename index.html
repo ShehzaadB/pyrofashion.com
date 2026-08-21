@@ -730,9 +730,9 @@ footer {
     cover.style.opacity = '0';
   }
 
-  // Fallback in case the API never loads / autoplay is blocked —
-  // don't leave the hero covered forever.
-  var fallback = setTimeout(reveal, 3000);
+  // Fallback in case the API never loads (blocked by an extension,
+  // slow network, etc) — don't leave the hero covered forever.
+  var fallback = setTimeout(reveal, 4000);
 
   var tag = document.createElement('script');
   tag.src = 'https://www.youtube.com/iframe_api';
@@ -741,12 +741,19 @@ footer {
   window.onYouTubeIframeAPIReady = function(){
     new YT.Player('heroVideoFrame', {
       events: {
+        onReady: function(e){
+          // Force playback explicitly — URL autoplay params alone are
+          // unreliable in some browsers/embedded webviews.
+          e.target.mute();
+          e.target.playVideo();
+        },
         onStateChange: function(e){
-          // Only lift the cover once the video is actually playing,
-          // so the paused-state/play-button watermark never shows through.
           if(e.data === YT.PlayerState.PLAYING){
             clearTimeout(fallback);
-            reveal();
+            // YouTube's own "playback started" icon briefly flashes the
+            // instant the state flips to playing — wait it out behind
+            // the cover before revealing.
+            setTimeout(reveal, 600);
           }
         }
       }
